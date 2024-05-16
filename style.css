@@ -1,0 +1,164 @@
+/* Reset padrão */
+body, html {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    width: 100%;
+    font-family: Arial, sans-serif;
+}
+
+.container {
+    display: flex;
+    height: 100vh;
+}
+
+/* Estilos da seção A */
+#section-a {
+    flex: 3;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 10px;
+}
+
+/* Estilos da seção B */
+#section-b {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 20px;
+    box-shadow: -2px 0 5px rgba(0, 0, 0, 0.1);
+}
+
+#map-aec {
+    padding: 10px;
+    font-family: 'Roboto', sans-serif; /* Aplica a fonte Roboto */
+    font-weight: 700;
+    display: flex;
+    justify-content: center; /* Alinha horizontalmente ao centro */
+    align-items: center; /* Alinha verticalmente ao centro */
+}
+
+#logo-aec {
+    padding: 10px;
+    display: flex;
+    justify-content: center; /* Alinha horizontalmente ao centro */
+    align-items: center; /* Alinha verticalmente ao centro */
+}
+
+#controles-map {
+    padding: 10px;
+    border: 2px solid #ccc;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Container para o mapa */
+#mapa-container {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    border: 2px solid #ccc;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Estilos para o mapa */
+#map {
+    width: 100%;
+    height: 100%;
+}
+
+/* Estilos para a área de pesquisa */
+#city-search {
+    margin-top: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+#city-search input[type="text"] {
+    padding: 8px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+#multi-city-input {
+    padding: 12px;  /* Aumentando o padding vertical */
+    font-size: 16px;
+    margin-top: 10px;  /* Adicionando margem superior */
+    width: 100%;
+    box-sizing: border-box;
+}
+
+/* Estilo para os botões */
+button {
+    padding: 10px;
+    font-size: 16px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+button.buscar-btn {
+    border: 1px solid #4CAF50;
+    background-color: #ffffff;
+    color: #4CAF50;
+}
+
+button.buscar-btn:hover {
+    background-color: #4CAF50;
+    color: #ffffff;
+}
+
+button.buscar-multi-btn {
+    border: 1px solid #007bff;
+    background-color: #ffffff;
+    color: #007bff;
+}
+
+button.buscar-multi-btn:hover {
+    background-color: #007bff;
+    color: #ffffff;
+}
+
+button.limpar-btn {
+    border: 1px solid #dc3545;
+    background-color: #dc3545;
+    color: white;
+}
+
+button.limpar-btn:hover {
+    background-color: #c82333;
+}
+
+/* Estilos para a tabela de opções de territórios */
+table {
+    margin-top: 20px;
+    width: 100%;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+    border-collapse: collapse;
+}
+
+td {
+    padding: 10px;
+    border: 1px solid #0c0e75;
+    text-align: left;
+}
+
+td label {
+    font-size: 16px;
+    cursor: pointer;
+}
+/* Estilos para a tabela de territórios */
+#territory-table-container {
+    max-height: 150px; /* Altura máxima para evitar overflow */
+    overflow-y: auto; /* Adicionar barra de rolagem vertical se necessário */
+    padding: 8px; /* Espaçamento interno */
+}

@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mapa Interativo de São Paulo</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster/dist/MarkerCluster.css">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster/dist/MarkerCluster.Default.css">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:400,700">
+</head>
+<body>
+    <div class="container">
+        <div id="section-a">
+            <div id="mapa-container">
+                <div id="map" style="height: 100%;"></div>
+            </div>
+        </div>
+        <div id="section-b">
+            <div id="map-aec">
+                <p>Regiões de Fornecedores</p>
+            </div>
+            <div id="logo-aec">
+                <img src="png/AeC Horizontal Azul.png" alt="Logo Mapa Fornecedores" style="max-width: 100%; height: auto; margin-top: 10px;">
+            </div>
+            <div id="controles-map">
+                <div id="city-search">
+                    <input type="text" id="city-input" placeholder="Ex: Sorocaba">
+                    <button class="buscar-btn" onclick="buscarCidade(document.getElementById('city-input').value)">Buscar uma cidade</button>
+                    <input type="text" id="multi-city-input" placeholder="Ex: Sorocaba, Itu, São Paulo">
+                    <button class="buscar-multi-btn" onclick="buscarMultiplasCidades()">Buscar várias cidades</button>
+                    <button class="limpar-btn" onclick="limparMapa()">Limpar Mapa</button>
+                    <label>
+                        <input type="checkbox" id="state-outline-checkbox" onchange="toggleContornoEstado()"> Mostrar Contorno do Estado
+                    </label>
+                </div>
+                <table>
+                    <tr>
+                        <td>
+                            <label>
+                                <input type="checkbox" id="territory-smc" onchange="toggleTerritory('smc')"> Mostrar Território SMC
+                            </label>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <label>
+                                <input type="checkbox" id="territory-banner" onchange="toggleTerritory('banner')"> Mostrar Território Banner
+                            </label>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <label>
+                                <input type="checkbox" id="territory-wago" onchange="toggleTerritory('wago')"> Mostrar Território WAGO
+                            </label>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <label>
+                                <input type="checkbox" id="territory-pfan" onchange="toggleTerritory('pfan')"> Mostrar Território Pfan
+                            </label>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+    <script src="https://unpkg.com/leaflet.markercluster/dist/leaflet.markercluster.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@turf/turf@6/turf.min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
