@@ -31,6 +31,16 @@ document.addEventListener('DOMContentLoaded', () => {
     loadingMessage.innerText = 'Carregando dados das cidades...';
     document.body.appendChild(loadingMessage);
 
+// Inicializar o botão de "Buscar várias cidades"
+const multiCityButton = document.querySelector('.buscar-multi-btn');
+if (multiCityButton) {
+    multiCityButton.disabled = true;
+} else {
+    console.error('O botão de "Buscar várias cidades" não foi encontrado.');
+}
+
+
+
     // Inicializar o mapa
     const map = L.map('map', {
         center: [-23.5505, -46.6333],
@@ -87,6 +97,9 @@ document.addEventListener('DOMContentLoaded', () => {
                 cityData = parseCSV(csvData);
                 console.log('Dados das cidades carregados:', cityData);
                 document.body.removeChild(loadingMessage); // Remover mensagem de carregamento
+                if (multiCityButton) {
+                    multiCityButton.disabled = false; // Habilitar o botão de "Buscar várias cidades"
+                }
             })
             .catch(error => {
                 console.error('Erro ao carregar dados das cidades:', error);
