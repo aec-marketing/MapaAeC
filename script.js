@@ -270,6 +270,7 @@ document.addEventListener('DOMContentLoaded', () => {
         checkbox.checked = false;
     });
 
+    
     // Expor funções globalmente
     window.buscarCidade = buscarCidade;
     window.limparMapa = limparMapa;
