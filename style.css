@@ -162,3 +162,85 @@ td label {
     overflow-y: auto; /* Adicionar barra de rolagem vertical se necessário */
     padding: 8px; /* Espaçamento interno */
 }
+
+/* Estilos para Território SMC */
+.territory-smc {
+    fill: #007bff;
+    stroke: blue;
+}
+
+/* Estilos para Território Banner */
+.territory-banner {
+    fill: yellow;
+    stroke: yellow;
+}
+
+/* Estilos para Território WAGO */
+.territory-wago {
+    fill: #4CAF50;
+    stroke: green;
+}
+
+/* Estilos para Território PFAN */
+.territory-pfan {
+    fill: #00aeef;
+    stroke: lightblue;
+}
+
+/* Estilos para a tabela de opções de territórios */
+#territory-table {
+    margin-top: 20px;
+    width: 100%;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+    border-collapse: collapse;
+}
+
+.territory-cell {
+    padding: 10px;
+    border: 1px solid #0c0e75;
+}
+
+/* Estilos para as cores de fundo das células */
+.territory-cell.smc {
+    background-color: #397ecf; /* Amarelo */
+}
+
+.territory-cell.banner {
+    background-color: #ffd600; /* Vermelho */
+}
+
+.territory-cell.wago {
+    background-color: #73b72b; /* Verde */
+}
+
+.territory-cell.pfan {
+    background-color: #00aeef; /* Azul */
+}
+
+/* Estilo para o hover no checkbox */
+.checkbox-label:hover {
+    background-color: #f0f0f0; /* Cor de fundo ao passar o mouse */
+}
+/* Estilos para o conteúdo do popup */
+.popup-content {
+    font-family: Arial, sans-serif;
+    font-size: 14px;
+    line-height: 1.4;
+}
+
+.popup-content b {
+    font-size: 16px;
+    margin-bottom: 5px;
+    display: block;
+}
+
+.popup-content ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.popup-content li {
+    margin: 5px 0;
+}

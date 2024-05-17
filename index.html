@@ -35,32 +35,40 @@
                         <input type="checkbox" id="state-outline-checkbox" onchange="toggleContornoEstado()"> Mostrar Contorno do Estado
                     </label>
                 </div>
-                <table>
+                <table id="territory-table">
                     <tr>
-                        <td>
-                            <label>
-                                <input type="checkbox" id="territory-smc" onchange="toggleTerritory('smc')"> Mostrar Território SMC
+                        <td class="territory-cell smc">
+                            <label for="territory-smc" class="checkbox-label">
+                                <input type="checkbox" id="territory-smc" onchange="toggleTerritory('smc')">
+                                Mostrar Território SMC
+                                <span class="checkmark"></span>
                             </label>
                         </td>
                     </tr>
                     <tr>
-                        <td>
-                            <label>
-                                <input type="checkbox" id="territory-banner" onchange="toggleTerritory('banner')"> Mostrar Território Banner
+                        <td class="territory-cell banner">
+                            <label for="territory-banner" class="checkbox-label">
+                                <input type="checkbox" id="territory-banner" onchange="toggleTerritory('banner')">
+                                Mostrar Território Banner
+                                <span class="checkmark"></span>
                             </label>
                         </td>
                     </tr>
                     <tr>
-                        <td>
-                            <label>
-                                <input type="checkbox" id="territory-wago" onchange="toggleTerritory('wago')"> Mostrar Território WAGO
+                        <td class="territory-cell wago">
+                            <label for="territory-wago" class="checkbox-label">
+                                <input type="checkbox" id="territory-wago" onchange="toggleTerritory('wago')">
+                                Mostrar Território WAGO
+                                <span class="checkmark"></span>
                             </label>
                         </td>
                     </tr>
                     <tr>
-                        <td>
-                            <label>
-                                <input type="checkbox" id="territory-pfan" onchange="toggleTerritory('pfan')"> Mostrar Território Pfan
+                        <td class="territory-cell pfan">
+                            <label for="territory-pfan" class="checkbox-label">
+                                <input type="checkbox" id="territory-pfan" onchange="toggleTerritory('pfan')">
+                                Mostrar Território Pfan
+                                <span class="checkmark"></span>
                             </label>
                         </td>
                     </tr>
@@ -72,6 +80,7 @@
     <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
     <script src="https://unpkg.com/leaflet.markercluster/dist/leaflet.markercluster.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@turf/turf@6/turf.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@turf/turf/turf.min.js"></script>
     <script src="script.js"></script>
 </body>
 </html>

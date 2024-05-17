@@ -50,25 +50,27 @@ document.addEventListener('DOMContentLoaded', () => {
             alert('Os dados das cidades ainda não foram carregados.');
             return;
         }
-
+    
         const normalizedCityName = normalizeString(cityName);
-
+    
         const city = cityData.find(item => {
             const normalizedItemName = normalizeString(item.nome);
             return normalizedItemName === normalizedCityName;
         });
-
+    
         if (city) {
             const { latitude, longitude } = city;
             const popupContent = criarConteudoPopup(city);
             const marker = L.marker([latitude, longitude]);
             marker.bindPopup(popupContent);
             markerClusterGroup.addLayer(marker); // Adicionar marcador ao grupo de agrupamento
+            marker.openPopup(); // Isso abrirá o popup automaticamente ao adicionar o marcador ao mapa
             map.setView([latitude, longitude], 13);
         } else {
             alert('Cidade não encontrada: ' + cityName);
         }
     }
+    
 
     // Função para carregar dados das cidades
     function carregarDadosCidades() {
@@ -94,9 +96,9 @@ document.addEventListener('DOMContentLoaded', () => {
     // Função para criar conteúdo do popup com informações da cidade e territórios
     function criarConteudoPopup(city) {
         const { nome, latitude, longitude } = city;
-        let popupContent = `<b>${nome}</b><br>Latitude: ${latitude}<br>Longitude: ${longitude}<br>`;
-        popupContent += '<b>Territórios:</b><br>';
-
+        let popupContent = `<div class="popup-content"><b>${nome}</b><br>Latitude: ${latitude}<br>Longitude: ${longitude}<br>`;
+        popupContent += '<b>Territórios:</b><ul>';
+        
         // Verificar territórios intersectados
         Object.keys(territoryLayers).forEach(territory => {
             const territoryLayer = territoryLayers[territory];
@@ -105,14 +107,50 @@ document.addEventListener('DOMContentLoaded', () => {
                 if (territoryGeoJSON && territoryGeoJSON.geometry) {
                     const isInside = turf.booleanPointInPolygon([longitude, latitude], territoryGeoJSON.geometry);
                     if (isInside) {
-                        popupContent += `${territory}<br>`;
+                        let territoryName;
+                        switch (territory) {
+                            case 'smc':
+                                territoryName = 'Território SMC';
+                                break;
+                            case 'banner':
+                                territoryName = 'Território Banner';
+                                break;
+                            case 'wago':
+                                territoryName = 'Território WAGO';
+                                break;
+                            case 'pfan':
+                                territoryName = 'Território PFAN';
+                                break;
+                            default:
+                                territoryName = 'Território Desconhecido';
+                        }
+                        popupContent += `<li>${territoryName}</li>`;
                     }
                 }
             }
         });
 
-        return popupContent;
+    popupContent += '</ul></div>';
+    return popupContent;
+}
+
+function criarConteudoPopup(city) {
+    const { nome, latitude, longitude, territories = [] } = city;
+    let popupContent = `<div class="popup-content"><b>${nome}</b><br>Latitude: ${latitude}<br>Longitude: ${longitude}<br>`;
+    popupContent += '<b>Territórios:</b><ul>';
+
+    if (territories.length > 0) {
+        territories.forEach(territory => {
+            popupContent += `<li>${territory}</li>`;
+        });
+    } else {
+        popupContent += '<li>Nenhum território</li>';
     }
+
+    popupContent += '</ul></div>';
+    return popupContent;
+}
+    
 
     // Função para limpar o mapa
     function limparMapa() {
@@ -163,23 +201,33 @@ document.addEventListener('DOMContentLoaded', () => {
     // Função para mostrar territórios
     function mostrarTerritorio(territory) {
         let geojsonFile;
-        let color;
+        let territoryClass;
+        let territoryName;
+
         switch (territory) {
             case 'smc':
                 geojsonFile = 'SVGs/SaoPaulo.geojson';
-                color = 'blue';
+                territoryClass = 'territory-smc';
+                territoryName = 'Território SMC';
+
                 break;
             case 'banner':
                 geojsonFile = 'SVGs/SaoPaulo.geojson';
-                color = 'yellow';
+                territoryClass = 'territory-banner';
+                territoryName = 'Território Banner';
+
                 break;
             case 'wago':
                 geojsonFile = 'SVGs/ContornoWago.geojson';
-                color = 'green';
+                territoryClass = 'territory-wago';
+                territoryName = 'Território WAGO';
+
                 break;
             case 'pfan':
                 geojsonFile = 'SVGs/ContornoPfan.geojson';
-                color = 'lightblue';
+                territoryClass = 'territory-pfan';
+                territoryName = 'Território PFAN';
+
                 break;
             default:
                 return;
@@ -190,24 +238,41 @@ document.addEventListener('DOMContentLoaded', () => {
             .then(data => {
                 if (data && data.features && data.features.length > 0) {
                     const layer = L.geoJSON(data, {
-                        style: { color }
+                        style: feature => ({
+                            className: territoryClass  // Aplicar classe CSS dinâmica
+                        })
                     });
                     territoryLayers[territory] = layer;
                     map.addLayer(layer);
 
-                    // Marcar a checkbox correspondente
-                    const checkbox = document.getElementById(`territory-${territory}`);
-                    if (checkbox) {
-                        checkbox.checked = true;
+                // Atualizar cityData com informações de territórios
+                cityData.forEach(city => {
+                    const { latitude, longitude } = city;
+                    const isInside = data.features.some(feature => {
+                        const territoryGeoJSON = feature.geometry;
+                        return turf.booleanPointInPolygon([longitude, latitude], territoryGeoJSON);
+                    });
+                    if (isInside) {
+                        if (!city.territories) {
+                            city.territories = [];
+                        }
+                        city.territories.push(territoryClass);
                     }
-                } else {
-                    console.error(`Território ${territory} não possui geometria válida.`);
+                });
+
+                // Marcar a checkbox correspondente
+                const checkbox = document.getElementById(`territory-${territory}`);
+                if (checkbox) {
+                    checkbox.checked = true;
                 }
-            })
-            .catch(error => {
-                console.error('Erro ao carregar GeoJSON:', error);
-            });
-    }
+            } else {
+                console.error(`Território ${territory} não possui geometria válida.`);
+            }
+        })
+        .catch(error => {
+            console.error('Erro ao carregar GeoJSON:', error);
+        });
+}
 
     // Função para analisar CSV
     function parseCSV(csvData) {
