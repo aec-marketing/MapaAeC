@@ -166,25 +166,29 @@ td label {
 /* Estilos para Território SMC */
 .territory-smc {
     fill: #007bff;
-    stroke: blue;
+    stroke: #397ecf;
+    fill-opacity: 5%;
 }
 
 /* Estilos para Território Banner */
 .territory-banner {
-    fill: yellow;
-    stroke: yellow;
+    fill: #ffd600;
+    stroke: #ffd600;
+    fill-opacity: 5%;
 }
 
 /* Estilos para Território WAGO */
 .territory-wago {
     fill: #4CAF50;
-    stroke: green;
+    stroke: #4CAF50;
+    fill-opacity: 5%;
 }
 
 /* Estilos para Território PFAN */
 .territory-pfan {
     fill: #00aeef;
-    stroke: lightblue;
+    stroke: #00aeef;
+    fill-opacity: 5%;
 }
 
 /* Estilos para a tabela de opções de territórios */
@@ -204,24 +208,25 @@ td label {
 
 /* Estilos para as cores de fundo das células */
 .territory-cell.smc {
-    background-color: #397ecf; /* Amarelo */
+    background-color: #397ecf; /* Azul Smc */
 }
 
 .territory-cell.banner {
-    background-color: #ffd600; /* Vermelho */
+    background-color: #ffd600; /* Amarelo Banner */
 }
 
 .territory-cell.wago {
-    background-color: #73b72b; /* Verde */
+    background-color: #73b72b; /* Verde Wago */
 }
 
 .territory-cell.pfan {
-    background-color: #00aeef; /* Azul */
+    background-color: #00aeef; /* Azul Pfan */
 }
 
 /* Estilo para o hover no checkbox */
 .checkbox-label:hover {
-    background-color: #f0f0f0; /* Cor de fundo ao passar o mouse */
+    background-color: #dadada; /* Cor de fundo ao passar o mouse */
+    mix-blend-mode: overlay;
 }
 /* Estilos para o conteúdo do popup */
 .popup-content {
